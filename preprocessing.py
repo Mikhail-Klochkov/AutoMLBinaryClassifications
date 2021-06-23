@@ -25,7 +25,15 @@ def preprocessing(df_train: pd.DataFrame,
     feature_importance - If the user wants to output the values of the importance of the features
     inplace - Whether to create copies
     verbose - Output of intermediate information
-
+    Short Explanations:
+      1) Deleting constant and id columns.
+      2) Identification of categorical columns and potentially categorical columns (with a finite number of unique values)
+      3) Working with columns of the date type, selection based on new features - (day of the week, day off or not, month, and so on)
+      4) Processing of missing values. (I have chosen the standard mod and median approach so far)
+      5) Percentile-based search for numerical outlier columns. For information to the user and the removal of potential emissions in small amounts.
+      6) In the case of a huge dataset - remove weakly correlated with the target column by the Pearson coefficient.
+      7) Encoding one hot and Label Encoder. Depending on the number of unique columns.
+      8) If you need to perform a feature importance analysis.
     Returns:
     If the inplace parameter = True then None otherwise preprocessed data
 
