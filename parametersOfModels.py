@@ -2,6 +2,9 @@
 import numpy as np
 from sklearn.metrics import roc_auc_score, accuracy_score, recall_score, precision_score, f1_score
 
+"""
+Some default parameters and grids for multiple models that are used in the tasks
+"""
 rf_params = {
     'n_jobs': -1,
     'n_estimators': 500,
