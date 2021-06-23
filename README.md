@@ -1,16 +1,17 @@
 # AutoMLBinaryClassifications
-A simple library implementation for solving the binary classification problem. It contains useful functions that you can independently refine and make more flexible with a variety of managed parameters.
+A simple library implementation for solving the binary classification problem. It contains useful functions that you can independently refine and make more flexible with a variety of managed parameters.Each class and function contains a brief description of what it does and what parameters it accepts.
 
+1) File preprocessing.py -contains a function that does all the data retraining actions (see in the file).
 
-Each class and function contains a brief description of what it does and what parameters it accepts.
+2) The autoMlClass.py - file contains the model class itself, as well as the Random Search CV helper function for CatboostClassifier/CatboostRegressor.
 
-File preprocessing.py -contains a function that does all the data retraining actions (see in the file).
+3) ParametersOfModels - file-contains grids for searching for hyperparameters of models and default parameters.
 
-The auto Ml Class file contains the model class itself, as well as the Random Search C V helper function for CatboostClassifier/CatboostRegressor.
+4) The validation.py  - file contains a method for cross validation_scores-calculation of the classification quality metrics of interest.
 
-Parameters Of Models file-contains grids for searching for hyperparameters of models and default parameters.
+5) main.py - I ran an example to track that everything works and doesn't crash.
 
-The validation file contains a method for cross validation_scores-calculation of the classification quality metrics of interest.
+6) The requirements.txt - file contains the necessary libraries for the methods to work properly.
 
 In general, I wrote more in Colab, where it was more convenient to track the results, so in this repository there are only all methods and classes.
 
