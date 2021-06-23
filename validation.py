@@ -21,10 +21,12 @@ def crossValidationKfold(automodel,
    1) model - our model implemented earlier
    2) X, y - np.ndarray prod.Data Frame with
    3) params_automl-model parameters for initializing the class object.
-   4) score_function - quality function (metric).
+   4) score_function - quality function (metric) default = accuracy.
    5) cv-number of StratifiedKFold
    6) allmetrics-calculate all metrics (f1, recall, precision, roc_auc, accuracy and etc)
   Returns:
+    if allmetrics is False - Returns two values mean the scoring_cv and std of the specifically passed metric
+    else - Returns dict for all cv metrics (f1, precision, recall, precision, roc_auc).
   """
   if(isinstance(X, pd.DataFrame) or isinstance(y, pd.DataFrame)):
     X = X.values
