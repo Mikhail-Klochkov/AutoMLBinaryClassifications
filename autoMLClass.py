@@ -24,6 +24,17 @@ def RandomSearchCVCatboost(model, X, y,
                           ):
   """
   returned the best_model fit and best_params
+  Parameters:
+    Model-similar to catboost (Regressor, Classifier)
+    X, y - np.as array or pd. DataFrame
+    param_grid-parameter grid
+    scoring_cv-function that measures the quality of the classification or regression model
+    high_is_better - what to look for the minimum or maximum of the scoring function
+    
+    other optional parameters
+  Returns:
+    Returns the best model and best parameters
+  A method that allows you to search for hyperparameters for the catboost type of models.
   """
 
   if(isinstance(X, pd.DataFrame)):
@@ -111,6 +122,10 @@ def RandomSearchCVCatboost(model, X, y,
 
 class AutoMLBinaryClassification2edition(object):
 
+  """
+  The class implements Auto ML. With common methods such as init-defines training type parameters and fit, predict.
+  """
+  
   def __init__(self, 
                defaultparams: bool = True, 
                allalgo : bool = False,
@@ -118,6 +133,12 @@ class AutoMLBinaryClassification2edition(object):
                verbose = 0,
                blending = False,
                scoring_function = accuracy_score):
+    
+    """
+    Parameters: 
+    Returns:
+    
+    """
     
     self._defaultparams = defaultparams
     self._allalgo = allalgo
