@@ -9,17 +9,18 @@ from validation import crossValidationKfold
 from autoMLClass import RandomSearchCVCatboost, AutoMLBinaryClassification2edition
 
 if __name__ == '__main__':
-    # -- should be files in data train.csv, test.csv by default or use your custom names -- #
-
     parser = argparse.ArgumentParser()
+    # -- loader is folder where exist file csv -- #
     parser.add_argument('--loader',
                         required = True,
                         help = 'It is loader which contain train and test data'
                         )
+    # -- name of train file csv -- #
     parser.add_argument('--train',
                         required = True,
                         help = 'Name of train data .csv'
                         )
+    # -- mode (binary, multiclass)  (You can later implement) -- #
     parser.add_argument('--mode', 
                         choices = ['binary_classification', 'multi_classificaton'],
                         required = False,
@@ -29,6 +30,7 @@ if __name__ == '__main__':
     names_another_files = []
     current_directory = os.path.dirname(os.path.realpath(__file__))
     args = parser.parse_args()
+    # -- Searches the loader folder for all csv files -- #
     print(f"current path: {current_directory}")
     for root, dirs, files in os.walk(top = current_directory + "/" + args.loader):
         print(root, dirs)
@@ -38,11 +40,13 @@ if __name__ == '__main__':
             else:
                 names_another_files.append(root + "/" + file)
 
-    #print("csv: ", names_csv_files)
-    #print("not csv: ", names_another_files)
+    
     if(args.train.find('csv') != -1):
+        # -- load data from loader -- #
         df = load_data(names_csv_files[0])
+        # -- shuffle -- #
         df = df.sample(frac = 1).reset_index(drop=True)
+        # -- split on train and test -- #
         split_index = int(0.7 * df.shape[0])
         df_test = df.iloc[split_index: ]
         df_train = df.iloc[:split_index] 
@@ -66,7 +70,8 @@ if __name__ == '__main__':
                    'allalgo': True,
                    'blending' : True,
             }
-        # -- validations -- #
+        # -- fit and validations with default params, with several models -- #
+        # -- with blending all models and Take into account class balancing (I didn't have time to make it another parameter)  -- #
         means_metrics = crossValidationKfold(AutoMLBinaryClassification2edition, 
                      X.iloc[:5000, :], y[:5000],
                      params_automl = params_,
