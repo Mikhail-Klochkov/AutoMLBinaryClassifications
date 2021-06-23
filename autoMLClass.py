@@ -157,6 +157,12 @@ class AutoMLBinaryClassification2edition(object):
                          'ExtraTrees']
 
   def fit(self, X, y):
+    """
+    The fit method optionally allows you to count one model with default parameters (with Randomsearch search),
+    several models (randomForest, LogRegression, SGDClassifier, ExtraTree). 
+    And it is also possible to search for optimal hyperparameters for each model by Randomsearch.
+    The situation when classes are unbalanced is also taken into account.
+    """
     if(self._balanced):
         weights = compute_class_weight(class_weight = 'balanced',
                                classes = np.unique(y),
@@ -251,6 +257,15 @@ class AutoMLBinaryClassification2edition(object):
         print('tuned all models RandomSearchCV (time) : {:.3f} sec'.format(timeit.default_timer() - start_common))
 
   def predict(self, X, blending = True):
+    
+    """
+    Parameters:
+    X - np.asarray or pd.DataFrame 
+    blending - optional parameters for majority vote 
+    Predict and Predict Probe can be done for multiple models by majority vote and just output for each model individually. 
+       In Predict_Proba for several models, for simplicity, I decided to add up the estimates of class accessories. 
+       I wanted to make Stacking for many models, but there was not enough time, so I did not complicate it."""
+    
     if(not self._allalgo):
       X_pool = Pool(X)
       return self._one_model.predict(X_pool)
@@ -269,6 +284,9 @@ class AutoMLBinaryClassification2edition(object):
         return preds
 
   def predict_proba(self, X):
+    """
+    In Predict_Proba for several models, for simplicity, I decided to add up the estimates of class accessories.
+    """
     if(not self._allalgo):
       X_pool = Pool(X)
       return self._one_model.predict(X_pool)
