@@ -15,6 +15,17 @@ def crossValidationKfold(automodel,
                          verbose : bool = True,
                          allmetrics: bool = False):
 
+  """
+  The cross-classification method for our AutoMLBinaryClassification class.
+  Parameters:
+   1) model - our model implemented earlier
+   2) X, y - np.ndarray prod.Data Frame with
+   3) params_automl-model parameters for initializing the class object.
+   4) score_function - quality function (metric).
+   5) cv-number of StratifiedKFold
+   6) allmetrics-calculate all metrics (f1, recall, precision, roc_auc, accuracy and etc)
+  Returns:
+  """
   if(isinstance(X, pd.DataFrame) or isinstance(y, pd.DataFrame)):
     X = X.values
     y = y.values
