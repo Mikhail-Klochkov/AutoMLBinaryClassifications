@@ -260,12 +260,15 @@ class AutoMLBinaryClassification2edition(object):
     
     """
     Parameters:
-    X - np.asarray or pd.DataFrame 
-    blending - optional parameters for majority vote 
-    Predict and Predict Probe can be done for multiple models by majority vote and just output for each model individually. 
-       In Predict_Proba for several models, for simplicity, I decided to add up the estimates of class accessories. 
-       I wanted to make Stacking for many models, but there was not enough time, so I did not complicate it."""
-    
+      X - np.asarray or pd.DataFrame 
+      blending - optional parameters for majority vote 
+      Predict and Predict Probe can be done for multiple models by majority vote and just output for each model individually. 
+      In Predict_Proba for several models, for simplicity, I decided to add up the estimates of class accessories. 
+      I wanted to make Stacking for many models, but there was not enough time, so I did not complicate it.
+    Returned:
+      np.asarray - predicts for labels 
+    """
+   
     if(not self._allalgo):
       X_pool = Pool(X)
       return self._one_model.predict(X_pool)
@@ -285,7 +288,11 @@ class AutoMLBinaryClassification2edition(object):
 
   def predict_proba(self, X):
     """
+    Parameters:
+      X - np.asarray or pd.DataFrame 
     In Predict_Proba for several models, for simplicity, I decided to add up the estimates of class accessories.
+    Returned:
+      np.asarray - predicts probabilities for samples X
     """
     if(not self._allalgo):
       X_pool = Pool(X)
